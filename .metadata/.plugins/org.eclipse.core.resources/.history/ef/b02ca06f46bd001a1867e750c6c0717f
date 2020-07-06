@@ -1,0 +1,120 @@
+package com.rootquotient.questionanswer.controller;
+
+/*
+ * 
+ * This is the PatientController Class,
+ * 
+ * Which provides the basic Rest service related to the Patient View Page.
+ * 
+ * */
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rootquotient.questionanswer.model.Appointment;
+import com.rootquotient.questionanswer.model.Doctor;
+import com.rootquotient.questionanswer.model.MediCare;
+import com.rootquotient.questionanswer.model.PatientTestReport;
+import com.rootquotient.questionanswer.service.UserService;
+
+@RestController
+@RequestMapping("/patient")
+public class PatientController {
+
+	PatientController()
+	{
+		System.out.println("PatientController Bean was creatred Successfully");
+	}
+	@Autowired
+	private UserService userService;
+	
+	/*The Following Services are all for Pattient Appointment Task*/
+	
+	/*1. Working service*/
+	
+	/*
+	 * Demo URL:http://localhost:8082/patient/MedicareServices
+	 * 
+	 * */
+	@GetMapping("/MedicareServices")
+	public Collection<MediCare> getAllMedicareServices()
+	{
+		return userService.getAllMedicareServices();
+	}
+	
+	/*2. Working Service */
+	/*
+	 * Demo URL:http://localhost:8082/patient/doctorByMedicareId/100
+	 * 
+	 * */
+	@GetMapping("/doctorByMedicareId/{id}")
+	public Collection<Doctor> getMyDoctorByMedicareId(@PathVariable("id") Integer medicareId)
+	{
+		return userService.getAllDoctorsByMedicareId(medicareId);
+	}
+	
+	/*3. Working Service*/
+	/*
+	 * Demo URL:http://localhost:8082/patient/status/1
+	 * */
+	@GetMapping("/status/{id}")
+	public Collection<Appointment> getAllMyAppointmentsById(@PathVariable("id") Integer patientId)
+	{
+		return userService.getAllAppointmentsByPatientId(patientId);
+	}
+	
+	/*4. Working Service*/
+	/*
+	 * Demo URL:http://localhost:8082/patient/history/1
+	 * 
+	 * */
+	@GetMapping("/history/{id}")
+	public Collection<PatientTestReport> getPatientReportById(@PathVariable("id") Integer patientId)
+	{
+		return userService.getAllMedicaleTestReportByPatientId(patientId);
+	}
+	
+	/*5. Working service*/
+	/*
+	 * Demo URL:http://localhost:8082/patient/bookAppointment/followed by appointment JSON details
+	 * 
+	 * Input:
+	 *         {
+        "id": 502, // here, u don't need to give the Id Because it was generated automatically.
+        "patientId": 3,
+        "medicareServiceId": 102,
+        "doctorId": 12,
+        "date": "2019-06-07",
+        "time": "11:09:00",
+        "status": false
+         }
+     *
+	 */
+	@PostMapping(path = "/bookAppointment")
+	public void bookMyAppointment(@RequestBody Appointment appointment)
+	{
+		
+		userService.saveMyAppointment(appointment);
+	}
+	
+	/* To get a particular doctor's details by id*/
+	@GetMapping("/doctordetail/{id}")
+	public Doctor getDoctorDetailsById(@PathVariable("id") Integer doctorId)
+	{
+		return userService.getDoctorDetailsById(doctorId);
+	}
+	
+	@GetMapping("/allDoctors")
+    public Collection<Doctor> getAllDoctorList(){
+          return userService.getAllDoctorsByPatient();
+
+    }
+
+}

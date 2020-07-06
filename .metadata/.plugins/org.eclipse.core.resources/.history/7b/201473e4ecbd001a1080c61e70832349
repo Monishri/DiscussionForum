@@ -1,0 +1,123 @@
+package com.rootquotient.questionanswer.controller;
+
+/*
+ * 
+ * This is the DoctorController Class,
+ * 
+ * Which provides the basic Rest service related to the Doctor View Page.
+ * 
+ * */
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rootquotient.questionanswer.model.Appointment;
+import com.rootquotient.questionanswer.model.MediCare;
+import com.rootquotient.questionanswer.model.PatientTestReport;
+import com.rootquotient.questionanswer.service.UserService;
+
+@RestController
+@RequestMapping("/doctor")
+public class QuestionController {
+
+	@Autowired
+	private UserService userService;
+	
+	/*0. Working Service*/
+	/*
+	 * Demo URL:http://localhost:8082/doctor/MedicareServices
+	 * 
+	 * */
+	
+	@GetMapping("/MedicareServices")
+	public Collection<MediCare> getAllMedicareServices()
+	{
+		return userService.getAllMedicareServices();
+	}
+	
+	/*1. Working Service*/
+	/*
+	 * Demo URL:http://localhost:8082/doctor/appointments
+	 * 
+	 * */
+	@GetMapping("/appointments/{id}")
+	public Collection<Appointment> getAllPatientsAppointments(@PathVariable("id") Integer doctorId)
+	{
+		return userService.getAllAppointments(doctorId);
+	}
+	
+	/*2. Working Service
+	 * 
+	 * Demo URL: http://localhost:8082/doctor/updateStatus/500/false
+	 * 
+	 * */
+	@RequestMapping("/updateStatus/{id}/{status}")
+	public void updateThePatientAppointmentStatus(@PathVariable("id") Integer patientId,@PathVariable("status")boolean appointmentStatus)
+	{
+		userService.updatePatientAppointmentStatus(patientId,appointmentStatus);
+	}
+	
+	/*3. Working Service
+	 * 
+	 * Demo URL:http://localhost:8082/doctor/patientsReports/10
+	 * 
+	 * */
+	@GetMapping("/patientsReports/{id}")
+	public Collection<PatientTestReport> getPatientsReportByDoctorId(@PathVariable("id") Integer doctorId)
+	{
+		return userService.getAllMedicalTestReportByDoctorId(doctorId);
+	}
+	
+	/*4. Working Service
+	 * 
+	 * Demo URL:http://localhost:8082/doctor/addReport (followed by patientTestReport as JSON format)
+	 * 
+	     {
+        "user_id": 1,
+        "doctor_id": 10,
+        "medicareService_id": 100,
+        "mtServiceDate": "2018-01-16",
+        "mtTestResultDate": "2018-06-21",
+        "mtDiag1ActualValue": 12,
+        "mtDiag1NormalRange": 23,
+        "mtDiag2ActualValue": 34,
+        "mtDiag3ActualValue": 23,
+        "mtDiag3NormalRange": 12,
+        "mtDiag4ActualValue": 23,
+        "mtDiag4NormalRange": 14,
+        "mtDoctorComments": "Test Comment",
+        "mtOtherInfo": "Good>>>> :-)"
+     }
+	 * 
+	 * */
+//	@PostMapping(path = "/addReport")
+//	public void addPatientReports(@RequestBody PatientTestReport patientReport)
+//	{
+//		userService.savePatientReport(patientReport);
+//	}
+	
+//	@GetMapping("/patientDetails/{id}")
+//	public Collection<PatientTestReport> getPatientsDetailsByDoctorId(@PathVariable("id") Integer doctorId)
+//	{
+//		return userService.getAllPatientsDetailsByDoctorId(doctorId);
+//	}
+	
+	  @PutMapping(path = "/saveeditReport")
+      public void addPatientReports(@RequestBody PatientTestReport patientReport)
+      {
+             userService.savePatientReport(patientReport);
+      }
+     
+      
+      @GetMapping("/editReport/{pid}/{did}")
+      public Collection<PatientTestReport> editPatientReport(@PathVariable("pid") Integer patientId,@PathVariable("did") Integer doctorId){
+      return userService.editPatientReport(patientId, doctorId);
+      }
+
+}

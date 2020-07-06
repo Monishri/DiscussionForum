@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;authentication-admin-service&apos; to &apos;authentication-user-service&apos;" description="Rename resource &apos;authentication-admin-service&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/authentication-admin-service" name="authentication-user-service" stamp="1593689432827" updateReferences="true"/>
+</session>

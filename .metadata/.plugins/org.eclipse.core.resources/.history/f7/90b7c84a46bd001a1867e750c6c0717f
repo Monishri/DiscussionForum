@@ -1,0 +1,116 @@
+package com.rootquotient.questionanswer.model;
+
+
+
+import java.sql.Time;
+import java.util.Date;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tblappointment")
+public class Appointment {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ap_appointment_id")
+	private int id;
+	
+	@Column(name = "ap_pt_user_id")
+	private Integer patientId;
+	
+	@Column(name = "ap_md_medicare_service_id")
+	private Integer medicareServiceId;
+	
+	@Column(name = "ap_dr_user_id")
+	private Integer doctorId;
+	
+	@Column(name = "ap_date")
+	private Date date;
+	
+	@Column(name = "ap_time")
+	private Time time;
+	
+	@Column(name = "ap_status",columnDefinition="BIT")
+	private boolean status;
+	
+	Appointment()
+	{
+		
+	}
+
+	public Appointment(int id, Integer patientId, Integer medicareServiceId, Integer doctorId, Date date, Time time,
+			boolean status) {
+		super();
+		this.id = id;
+		this.patientId = patientId;
+		this.medicareServiceId = medicareServiceId;
+		this.doctorId = doctorId;
+		this.date = date;
+		this.time = time;
+		this.status = status;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
+	public Integer getPatientId() {
+		return patientId;
+	}
+
+
+	public void setPatientId(Integer patientId) {
+		this.patientId = patientId;
+	}
+
+
+	public Integer getMedicareServiceId() {
+		return medicareServiceId;
+	}
+
+
+	public void setMedicareServiceId(Integer medicareServiceId) {
+		this.medicareServiceId = medicareServiceId;
+	}
+
+
+	public Integer getDoctorId() {
+		return doctorId;
+	}
+
+
+	public void setDoctorId(Integer doctorId) {
+		this.doctorId = doctorId;
+	}
+	
+}

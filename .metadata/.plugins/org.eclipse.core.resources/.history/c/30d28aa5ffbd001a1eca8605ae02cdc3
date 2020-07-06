@@ -1,0 +1,180 @@
+package com.rootquotient.questionanswer.service;
+
+/*
+ * This is the general Service Class,
+ * 
+ * Which give all basic services for our Application
+ * 
+ * It Internally Use the following Repositories
+ * 
+ * 1.AppointmentRepository
+ * 
+ * 2.DoctorRepository
+ * 
+ * 3.MedicareRepository
+ * 
+ * 4.PatientRepository
+ * 
+ * 5.PatientHistoryRepository
+ * 
+ * */
+
+import java.util.Collection;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.rootquotient.questionanswer.model.Question;
+import com.rootquotient.questionanswer.model.Answer;
+import com.rootquotient.questionanswer.repository.AnswerRepository;
+import com.rootquotient.questionanswer.repository.QuestionRepository;
+
+@Service
+public class UserService {
+
+	@Autowired
+	private AnswerRepository answerRepository;
+	
+	@Autowired
+	private QuestionRepository questionRepository;
+	
+	
+	
+	/*Main Service's Methods Begin*/
+	
+	/*
+	 * 
+	 * #################### <--------------------------------The Following methods are all related to Patient View Page---------------------------------------->########################
+	 *                                                      ((((((((((((((  Patient Service Methods  ))))))))))))))))))
+	 * 
+	 * */
+	
+	/*This method get all questions Services */
+	public Collection<Question> getAllQuestion()
+	{
+		return questionRepository.findAll();
+	}
+	
+	/*This method get all doctor based on medicare ID*/
+	public Collection<Answer> getAllAnswersByQId(Integer QuestionId) {
+		return answerRepository.findAllAnswerByQuestionId(QuestionId);
+	}
+	
+	/*This method get Appointment as an object and save that in to our Database*/
+	public void saveMyAppointment(Appointment appointment)
+	{
+	   appointmentRepository.save(appointment);
+	}
+	
+	/*This method get all Appointments of patient based on patient ID, which is used to see the status of patient*/
+	public Collection<Appointment> getAllAppointmentsByPatientId(Integer patientId)
+	{
+		return appointmentRepository.findAllMyAppointmentsByPatientId(patientId);
+		
+	}
+	
+	/*This method get all MedicalHistory of patient based on patient ID*/
+	public Collection<PatientTestReport> getAllMedicaleTestReportByPatientId(Integer patientId) {
+		return patientHistoryRepository.findAllMyMedicalHistorByPatientId(patientId);
+	}
+	
+	/*This method gets a doctos's details on doctor ID*/
+	public Doctor getDoctorDetailsById(Integer doctorId) {
+		return doctorRepository.findById(doctorId).get();
+	}
+
+	/*
+	 * 
+	 * #################### <--------------------------------The Following methods are all related to Doctor View Page---------------------------------------->########################
+  	 *                                                          (((((((((((( DOCTOR SERVICE METHODS  ))))))))))))
+	 * */
+	
+	/*This method get all appointment details of patient for Doctor approval purpose*/
+	public Collection<Appointment> getAllAppointments(Integer doctorId) {
+		return appointmentRepository.findAllAppointmentsByDoctorId(doctorId);
+	}
+
+	/*This Method, Update the give appointment status to the mentioned Patient Appointment*/
+	public void updatePatientAppointmentStatus(Integer patientId,boolean appointmentStatus) {
+		if(appointmentRepository.findById(patientId).isPresent())
+		{
+			Appointment patientAppointment = appointmentRepository.findById(patientId).get();
+			
+			/*Here, I updpate the Status of the patient as true*/
+			
+			patientAppointment.setStatus(appointmentStatus);
+			
+			appointmentRepository.save(patientAppointment);
+		}
+	}
+	
+	/*This method get all Medical Test Report of all patient based on Doctor ID*/
+	public Collection<PatientTestReport> getAllMedicalTestReportByDoctorId(Integer doctorId) {
+		return patientHistoryRepository.findAllMyMedicalTestReportByDoctorId(doctorId);
+	}
+
+	/*This method save all patient Medical Test Report of all patient*/
+	public void savePatientReport(PatientTestReport patientReport) {
+		patientHistoryRepository.save(patientReport);
+		
+	}
+	
+    
+    /*Edit report*/
+    public Collection<PatientTestReport> editPatientReport(Integer patientId, Integer doctorId){
+    return  patientHistoryRepository.editPatientReport(patientId, doctorId);
+    }
+
+	
+		
+//	/*This method gets all patient's details for a particular doctor id*/
+//	public Collection<PatientTestReport> getAllPatientsDetailsByDoctorId(Integer doctorId) {
+//		return patientRepository.findAllPatientsDetailstByDoctorId(doctorId);
+//	}
+	
+	
+	
+	/*
+     * 
+      * #################### <--------------------------------The Following methods are all related to Doctor View Page---------------------------------------->########################
+      *                                                          (((((((((((( ADMIN SERVICE METHODS  ))))))))))))
+     * */
+    
+    /*this is for all patient details */
+ 
+ public Collection<Answer> getAllPatients(){
+	   return patientRepository.findAll();
+  }
+ 
+ 
+ public Collection<Doctor> getAllDoctors(){
+	   return doctorRepository.findAll();
+  }
+ 
+ @Transactional
+ public void modifyService(MediCare medicare) {
+ 	medicareRepository.save(medicare);
+ } 
+ 
+ @Transactional
+ public void removeDoctorDetailsById(Integer id) {
+	 appointmentRepository.deleteAppointmentById(id);
+	
+	 patientHistoryRepository.deleteHistoryById(id);
+	 
+ 	doctorRepository.deleteById(id);
+ } 
+ 
+
+
+ public Collection<Doctor> getAllDoctorsByPatient(){
+       return doctorRepository.findAll();
+        }
+
+
+
+}

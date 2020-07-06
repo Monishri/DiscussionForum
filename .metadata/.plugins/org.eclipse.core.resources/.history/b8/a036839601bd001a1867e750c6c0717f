@@ -1,0 +1,24 @@
+
+# routing for account service
+#zuul.routes.account-service.url=http://localhost:8087
+
+# routing for loan service
+#zuul.routes.loan-service.url=http://localhost:8088
+
+
+# routing for account service
+zuul.routes.authentication-service.url=http://authentication-user-service:8092
+
+# routing for loan service
+#zuul.routes.medicare-service.url=http://medicare-service:8082
+
+# disable load balancing
+ribbon.eureka.enabled=false
+
+# port for zuul proxy
+server.port=8083
+
+zuul.routes.authentication-doctor.sensitive-headers: Cookie,Set-Cookie
+zuul.routes.authentication-service.sensitive-headers: Cookie,Set-Cookie
+zuul.routes.medicare-service.sensitive-headers: Cookie,Set-Cookie
+zuul.routes.authentication-admin.sensitive-headers: Cookie,Set-Cookie

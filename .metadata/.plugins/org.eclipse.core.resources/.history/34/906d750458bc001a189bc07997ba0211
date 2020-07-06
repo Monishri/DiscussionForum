@@ -1,0 +1,15 @@
+package com.rootquotient.user.authentication.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.cognizant.admin.authentication.model.Admin;
+
+
+@Repository
+public interface AdminRepository extends JpaRepository<Admin, Integer>{
+	@Query(value = "select * from tbladmin where ad_firstname =?1", nativeQuery = true)
+	public  Admin findByUsername(String username);
+
+}

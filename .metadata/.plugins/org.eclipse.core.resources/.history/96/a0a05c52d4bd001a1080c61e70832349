@@ -1,0 +1,27 @@
+package com.rootquotient.questionanswer.repository;
+
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.rootquotient.questionanswer.model.Appointment;
+
+@Repository
+public interface AppointmentRepository extends JpaRepository<Appointment,Integer>{
+
+	@Query(value = "SELECT * FROM tblappointment where ap_pt_user_id = ?1",nativeQuery = true)
+	public Collection<Appointment> findAllMyAppointmentsByPatientId(Integer patientId);
+	
+	
+	@Query(value = "SELECT * FROM tblappointment where ap_dr_user_id = ?1",nativeQuery = true)
+	public Collection<Appointment> findAllAppointmentsByDoctorId(Integer doctorId);
+	
+	@Modifying
+	@Query(value = "DELETE FROM tblappointment where ap_dr_user_id = ?1",nativeQuery = true)
+	public void deleteAppointmentById(Integer doctorId);
+	
+}

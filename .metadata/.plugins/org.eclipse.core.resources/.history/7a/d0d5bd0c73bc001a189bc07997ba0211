@@ -1,0 +1,73 @@
+package com.rootquotient.user.authentication.security;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.rootquotient.user.authentication.exception.UsernameAlreadyExistsException;
+import com.rootquotient.user.authentication.model.User;
+import com.rootquotient.user.authentication.repository.AdminRepository;
+
+@Service
+public class AppUserDetailService implements UserDetailsService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AppUserDetailService.class);
+	@Autowired
+	AdminRepository patientRepository;
+
+	AppUser appUser;
+	User patient;
+
+	public AppUserDetailService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public AppUserDetailService(AdminRepository patientRepository) {
+		super();
+		this.patientRepository = patientRepository;
+	}
+
+	
+	public UserDetails loadUserByUsername(String fName) throws UsernameNotFoundException {
+		patient = patientRepository.findByUsername(fName);
+		if (patient == null)
+			throw new UsernameNotFoundException("username not found");
+		else
+			appUser = new AppUser(patient);
+		return appUser;
+	}
+
+	public void signUp(User patient) throws UsernameAlreadyExistsException {
+		LOGGER.info("SignUp starts");
+		String pass = patient.getPassword();
+		patient.setPassword(passwordEncoder().encode(pass));
+		String patientName = patient.getUsername();
+		User patientExists = patientRepository.findByUsername(patientName);
+		System.out.println("patient" + patientName);
+		if (patientExists != null) {
+			throw new UsernameAlreadyExistsException();
+		} else {
+		//	Role role = roleRepository.findById(2);
+	//		Set<Role> roleList = new HashSet<Role>();
+			//roleList.add(role);
+			//user.setRoleList(roleList);
+			this.patientRepository.save(patient);
+
+		}
+		LOGGER.info("SignUp ends");
+	}
+
+	private PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+}

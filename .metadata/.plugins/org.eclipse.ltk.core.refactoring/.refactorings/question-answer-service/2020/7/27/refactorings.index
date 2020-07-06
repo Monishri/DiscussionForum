@@ -1,0 +1,18 @@
+1593770348349	Rename package 'com.cognizant.medicaresystem'
+1593770372592	Rename package 'com.cognizant.medicaresystem.controller'
+1593770396368	Rename package 'com.cognizant.medicaresystem.model'
+1593770419270	Rename package 'com.cognizant.medicaresystem.repository'
+1593770441433	Rename package 'com.cognizant.medicaresystem.service'
+1593791296994	Rename type 'Admin'
+1593791961754	Rename type 'Patient'
+1593792018860	Delete elements
+1593792031780	Delete element
+1593792062005	Rename type 'DoctorController'
+1593792080705	Rename type 'PatientController'
+1593852900164	Rename type 'AdminRepository'
+1593852940102	Rename type 'PatientTestReportRepository'
+1593853013914	Delete element
+1593853020089	Delete element
+1593853024976	Delete element
+1593853030104	Delete element
+1593853156201	Rename type 'PatientRepository'

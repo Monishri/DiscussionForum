@@ -1,0 +1,28 @@
+package com.cognizant.medicaresystem.repository;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.rootquotient.questionanswer.model.PatientTestReport;
+
+@Repository
+public interface PatientTestReportRepository extends JpaRepository<PatientTestReport, Integer>{
+
+	@Query(value = "SELECT * FROM tblmedicaltesthistory where mt_pt_user_id= ?1", nativeQuery = true)
+	public Collection<PatientTestReport> findAllMyMedicalHistorByPatientId(Integer patientId);
+
+	@Query(value = "SELECT * FROM tblmedicaltesthistory where mt_dr_user_id= ?1", nativeQuery = true)
+	public Collection<PatientTestReport> findAllMyMedicalTestReportByDoctorId(Integer doctorId);
+	
+    @Query(value="SELECT * FROM tblmedicaltesthistory where mt_pt_user_id=?1 and mt_dr_user_id = ?2",nativeQuery = true)
+    public Collection<PatientTestReport> editPatientReport(Integer patientId, Integer doctorId);
+
+    @Modifying
+	@Query(value = "DELETE FROM tblmedicaltesthistory where mt_dr_user_id= ?1", nativeQuery = true)
+    public void deleteHistoryById(Integer doctorId);
+
+}

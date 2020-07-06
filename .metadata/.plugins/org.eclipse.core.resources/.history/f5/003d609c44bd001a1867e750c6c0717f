@@ -1,0 +1,204 @@
+package com.rootquotient.questionanswer.model;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbladmin")
+public class Admin {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ad_user_id")
+	private int id;
+	@Column(name = "ad_firstname")
+	private String username;
+	@Column(name = "ad_lastname")
+	private String lastname;
+	@Column(name = "ad_age")
+	private int age;
+	@Column(name = "ad_gender")
+	private String gender;
+	@Column(name = "ad_dob")
+	private Date dob;
+	@Column(name = "ad_contact_no")
+	private long contact;
+	@Column(name = "ad_alt_contact_no")
+	private long altcontact;
+	@Column(name = "ad_email")
+	private String email;
+	@Column(name = "ad_password")
+	private String password;
+	@Column(name = "ad_address1")
+	private String add1;
+	@Column(name = "ad_address2")
+	private String add2;
+	@Column(name = "ad_city")
+	private String city;
+	@Column(name = "ad_state")
+	private String state;
+	@Column(name = "ad_zipcode")
+	private long zipcode;
+
+	public Admin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Admin(int id, String username, String lastname, int age, String gender, Date dob, long contact,
+			long altcontact, String email, String password, String add1, String add2, String city, String state,
+			long zipcode) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.lastname = lastname;
+		this.age = age;
+		this.gender = gender;
+		this.dob = dob;
+		this.contact = contact;
+		this.altcontact = altcontact;
+		this.email = email;
+		this.password = password;
+		this.add1 = add1;
+		this.add2 = add2;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public long getContact() {
+		return contact;
+	}
+
+	public void setContact(long contact) {
+		this.contact = contact;
+	}
+
+	public long getAltcontact() {
+		return altcontact;
+	}
+
+	public void setAltcontact(long altcontact) {
+		this.altcontact = altcontact;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getAdd1() {
+		return add1;
+	}
+
+	public void setAdd1(String add1) {
+		this.add1 = add1;
+	}
+
+	public String getAdd2() {
+		return add2;
+	}
+
+	public void setAdd2(String add2) {
+		this.add2 = add2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public long getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(long zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", username=" + username + ", lastname=" + lastname + ", age=" + age + ", gender="
+				+ gender + ", dob=" + dob + ", contact=" + contact + ", altcontact=" + altcontact + ", email=" + email
+				+ ", password=" + password + ", add1=" + add1 + ", add2=" + add2 + ", city=" + city + ", state=" + state
+				+ ", zipcode=" + zipcode + "]";
+	}
+
+}

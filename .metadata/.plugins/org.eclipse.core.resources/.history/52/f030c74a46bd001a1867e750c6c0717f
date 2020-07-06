@@ -1,0 +1,227 @@
+package com.rootquotient.questionanswer.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tblmedicaltesthistory")
+public class PatientTestReport {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "mt_report_id")
+	private int mtReportId;
+
+	@Column(name = "mt_pt_user_id")
+	private Integer user_id;
+	
+	@Column(name = "mt_dr_user_id")
+	private Integer doctor_id;
+
+	@Column(name = "mt_md_medicare_service_id")
+	private Integer medicareService_id;
+
+	@Column(name = "mt_servicedate")
+	private Date mtServiceDate;
+
+	@Column(name = "mt_testresultdate")
+	private Date mtTestResultDate;
+
+	@Column(name = "mt_diag1actualvalue")
+	private BigDecimal mtDiag1ActualValue;
+
+	@Column(name = "mt_diag1normalrange")
+	private BigDecimal mtDiag1NormalRange;
+
+	@Column(name = "mt_diag2actualvalue")
+	private BigDecimal mtDiag2ActualValue;
+
+	@Column(name = "mt_diag2normalrange")
+	private BigDecimal mtDiag2NormalRange;
+
+	@Column(name = "mt_diag3actualvalue")
+	private BigDecimal mtDiag3ActualValue;
+
+	@Column(name = "mt_diag3normalrange")
+	private BigDecimal mtDiag3NormalRange;
+
+	@Column(name = "mt_diag4actualvalue")
+	private BigDecimal mtDiag4ActualValue;
+
+	@Column(name = "mt_diag4normalrange")
+	private BigDecimal mtDiag4NormalRange;
+
+	@Column(name = "mt_doctorcomments")
+	private String mtDoctorComments;
+
+	@Column(name = "mt_otherinfo")
+	private String mtOtherInfo;
+
+	public PatientTestReport() {
+                                super();
+                }
+
+	
+	public PatientTestReport(int mtReportId, Integer user_id, Integer doctor_id, Integer medicareService_id,
+			Date mtServiceDate, Date mtTestResultDate, BigDecimal mtDiag1ActualValue, BigDecimal mtDiag1NormalRange,
+			BigDecimal mtDiag2ActualValue, BigDecimal mtDiag2NormalRange, BigDecimal mtDiag3ActualValue,
+			BigDecimal mtDiag3NormalRange, BigDecimal mtDiag4ActualValue, BigDecimal mtDiag4NormalRange,
+			String mtDoctorComments, String mtOtherInfo) {
+		super();
+		this.mtReportId = mtReportId;
+		this.user_id = user_id;
+		this.doctor_id = doctor_id;
+		this.medicareService_id = medicareService_id;
+		this.mtServiceDate = mtServiceDate;
+		this.mtTestResultDate = mtTestResultDate;
+		this.mtDiag1ActualValue = mtDiag1ActualValue;
+		this.mtDiag1NormalRange = mtDiag1NormalRange;
+		this.mtDiag2ActualValue = mtDiag2ActualValue;
+		this.mtDiag2NormalRange = mtDiag2NormalRange;
+		this.mtDiag3ActualValue = mtDiag3ActualValue;
+		this.mtDiag3NormalRange = mtDiag3NormalRange;
+		this.mtDiag4ActualValue = mtDiag4ActualValue;
+		this.mtDiag4NormalRange = mtDiag4NormalRange;
+		this.mtDoctorComments = mtDoctorComments;
+		this.mtOtherInfo = mtOtherInfo;
+	}
+
+
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
+	}
+
+	public Integer getDoctor_id() {
+		return doctor_id;
+	}
+
+	public void setDoctor_id(Integer doctor_id) {
+		this.doctor_id = doctor_id;
+	}
+
+	public Integer getMedicareService_id() {
+		return medicareService_id;
+	}
+
+	public void setMedicareService_id(Integer medicareService_id) {
+		this.medicareService_id = medicareService_id;
+	}
+
+	public int getMtReportId() {
+		return mtReportId;
+	}
+
+	public void setMtReportId(int mtReportId) {
+		this.mtReportId = mtReportId;
+	}
+	
+	public Date getMtServiceDate() {
+		return mtServiceDate;
+	}
+
+	public void setMtServiceDate(Date mtServiceDate) {
+		this.mtServiceDate = mtServiceDate;
+	}
+
+	public Date getMtTestResultDate() {
+		return mtTestResultDate;
+	}
+
+	public void setMtTestResultDate(Date mtTestResultDate) {
+		this.mtTestResultDate = mtTestResultDate;
+	}
+
+	public BigDecimal getMtDiag1ActualValue() {
+		return mtDiag1ActualValue;
+	}
+
+	public void setMtDiag1ActualValue(BigDecimal mtDiag1ActualValue) {
+		this.mtDiag1ActualValue = mtDiag1ActualValue;
+	}
+
+	public BigDecimal getMtDiag1NormalRange() {
+		return mtDiag1NormalRange;
+	}
+
+	public void setMtDiag1NormalRange(BigDecimal mtDiag1NormalRange) {
+		this.mtDiag1NormalRange = mtDiag1NormalRange;
+	}
+
+	public BigDecimal getMtDiag2ActualValue() {
+		return mtDiag2ActualValue;
+	}
+
+	public void setMtDiag2ActualValue(BigDecimal mtDiag2ActualValue) {
+		this.mtDiag2ActualValue = mtDiag2ActualValue;
+	}
+
+	public BigDecimal getMtDiag3ActualValue() {
+		return mtDiag3ActualValue;
+	}
+
+	public void setMtDiag3ActualValue(BigDecimal mtDiag3ActualValue) {
+		this.mtDiag3ActualValue = mtDiag3ActualValue;
+	}
+
+	public BigDecimal getMtDiag3NormalRange() {
+		return mtDiag3NormalRange;
+	}
+
+	public void setMtDiag3NormalRange(BigDecimal mtDiag3NormalRange) {
+		this.mtDiag3NormalRange = mtDiag3NormalRange;
+	}
+
+	public BigDecimal getMtDiag4ActualValue() {
+		return mtDiag4ActualValue;
+	}
+
+	public void setMtDiag4ActualValue(BigDecimal mtDiag4ActualValue) {
+		this.mtDiag4ActualValue = mtDiag4ActualValue;
+	}
+
+	public BigDecimal getMtDiag4NormalRange() {
+		return mtDiag4NormalRange;
+	}
+
+	public void setMtDiag4NormalRange(BigDecimal mtDiag4NormalRange) {
+		this.mtDiag4NormalRange = mtDiag4NormalRange;
+	}
+
+	public String getMtDoctorComments() {
+		return mtDoctorComments;
+	}
+
+	public void setMtDoctorComments(String mtDoctorComments) {
+		this.mtDoctorComments = mtDoctorComments;
+	}
+
+	public String getMtOtherInfo() {
+		return mtOtherInfo;
+	}
+
+	public void setMtOtherInfo(String mtOtherInfo) {
+		this.mtOtherInfo = mtOtherInfo;
+	}
+
+
+	public BigDecimal getMtDiag2NormalRange() {
+		return mtDiag2NormalRange;
+	}
+
+
+	public void setMtDiag2NormalRange(BigDecimal mtDiag2NormalRange) {
+		this.mtDiag2NormalRange = mtDiag2NormalRange;
+	}
+	
+}

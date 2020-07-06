@@ -1,0 +1,14 @@
+package com.rootquotient.questionanswer.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.rootquotient.questionanswer.model.MediCare;
+
+@Repository
+public interface MedicareRepository  extends JpaRepository<MediCare,Integer> {
+
+
+
+}

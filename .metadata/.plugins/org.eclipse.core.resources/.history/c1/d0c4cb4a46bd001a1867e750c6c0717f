@@ -1,0 +1,65 @@
+package com.rootquotient.questionanswer.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tblmedicare")
+public class MediCare {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "md_medicare_id")
+	private int id;
+	
+	@Column(name = "md_medicare_service")
+	private String medicareServiceName;
+	
+	@Column(name = "md_service_desp")
+	private String medicareServiceDescription;
+	
+	@Column(name = "md_amount")
+	private long amount;
+	
+	MediCare()
+	{
+		
+	}
+	
+	public MediCare(String medicareServiceName, String medicareServiceDescription, long amount ) {
+		this.medicareServiceName = medicareServiceName;
+		this.medicareServiceDescription = medicareServiceDescription;
+		this.amount = amount;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getMedicareServiceName() {
+		return medicareServiceName;
+	}
+
+	public void setMedicareServiceName(String medicareServiceName) {
+		this.medicareServiceName = medicareServiceName;
+	}
+
+	public String getMedicareServiceDescription() {
+		return medicareServiceDescription;
+	}
+
+	public void setMedicareServiceDescription(String medicareServiceDescription) {
+		this.medicareServiceDescription = medicareServiceDescription;
+	}
+
+	public long getAmount() {
+		return amount;
+	}
+
+	public void setAmount(long amount) {
+		this.amount = amount;
+	}
+}

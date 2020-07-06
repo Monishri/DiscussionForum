@@ -1,0 +1,44 @@
+
+package com.rootquotient.user.authentication.model;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "qanda")
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "u_id")
+	@NotNull
+	int userId;
+	
+	@Column(name="u_name")	
+	String username;
+	
+	//@JsonIgnore
+	@Column(name="u_password")
+	@NotNull(message = "Password should not be null")
+	@NotBlank(message = "Password should not be blank")
+
+	String password;
+	
+	@Column(name = "u_fname")
+	String firstName;
+
+	@Column(name = "u_lname")
+	String lastName;
+
+
+	
+
+}

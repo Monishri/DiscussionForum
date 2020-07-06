@@ -1,0 +1,23 @@
+package com.rootquotient.user.authentication.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rootquotient.user.authentication.model.Admin;
+import com.rootquotient.user.authentication.repository.AdminRepository;
+
+@Service
+public class Adminservice {
+	@Autowired
+	AdminRepository adminRepository;
+	
+	
+	public Admin getpatient(int id) {
+		Admin adminId = adminRepository.findById(id).get();
+		return adminId;
+	}
+	
+
+}
